@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   sample:
     docker:
-      - image: circleci/debian:10
+      - image: debian:10
     steps:
       - checkout
       - run:
