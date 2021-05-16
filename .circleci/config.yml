@@ -25,4 +25,9 @@ jobs:
 workflows:
   welcome:
     jobs:
-      - sample
+      - sample:
+          filters:
+            tags:
+              only: /.+/
+            branches:
+              ignore: /.*/
