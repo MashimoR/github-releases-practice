@@ -28,6 +28,6 @@ workflows:
       - sample:
           filters:
             branches:
-              ignore: /.*/
+              only: /.*/
             tags:
               only: /.+/
