@@ -15,6 +15,7 @@ jobs:
           name: Git Check
           command: |
             git --version
+            git pull
             git branch -vv
             COMMIT="$(git rev-parse HEAD)"
             TAG="$(git tag -l --points-at HEAD)"
