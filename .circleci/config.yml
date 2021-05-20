@@ -22,6 +22,28 @@ jobs:
             echo "COMMIT : ${COMMIT}"
             echo "TAG    : ${TAG}"
             echo "BRANCH : ${BRANCH}"
+      - run:
+          name: make directory
+          command: | 
+            mkdir -p build
+            cd ./build
+            touch sample.txt
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./build
+  sample2:
+    docker:
+      - image: debian:10
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ./build
+      - run: Check
+          command: |
+            ls -al ./build
+
+
 workflows:
   welcome:
     jobs:
@@ -31,3 +53,7 @@ workflows:
               only: /.*/
             tags:
               only: /.+/
+      -
+        sample2:
+          requires:
+            - sample
