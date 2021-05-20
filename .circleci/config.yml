@@ -39,7 +39,8 @@ jobs:
       - checkout
       - attach_workspace:
           at: ./build
-      - run: Check
+      - run:
+          name: Check
           command: |
             ls -al ./build
 
