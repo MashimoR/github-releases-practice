@@ -58,3 +58,8 @@ workflows:
         sample2:
           requires:
             - sample
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              only: /.+/
