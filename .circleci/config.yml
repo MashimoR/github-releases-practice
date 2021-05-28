@@ -54,10 +54,20 @@ workflows:
               ignore: /.*/
             tags:
               only: /.+/
+      - release?:
+          type: approval
+          requires:
+            - sample
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /.+/
       -
         sample2:
           requires:
             - sample
+            - release?
           filters:
             branches:
               ignore: /.*/
