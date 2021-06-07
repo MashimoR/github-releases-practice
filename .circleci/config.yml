@@ -72,4 +72,4 @@ workflows:
             branches:
               ignore: /.*/
             tags:
-              only: /.+/
+              only: /^release_.+$/
