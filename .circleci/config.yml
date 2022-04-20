@@ -7,69 +7,11 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Git のインストール
-          command: |
-            apt-get update -y && apt-get upgrade -y
-            apt-get install -y git
-      - run:
-          name: Git Check
-          command: |
-            git --version
-            git branch -vv
-            COMMIT="$(git rev-parse HEAD)"
-            TAG="$(git tag -l --points-at HEAD)"
-            BRANCH="$(git branch --contains ${E4_COMMIT} | cut -c3-)"
-            echo "COMMIT : ${COMMIT}"
-            echo "TAG    : ${TAG}"
-            echo "BRANCH : ${BRANCH}"
-      - run:
           name: make directory
           command: | 
-            mkdir -p build
-            cd ./build
-            touch sample.txt
-      - persist_to_workspace:
-          root: .
-          paths:
-            - ./build
-  sample2:
-    docker:
-      - image: debian:10
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ./build
-      - run:
-          name: Check
-          command: |
-            ls -al ./build/build
-
+            echo 'hello'
 
 workflows:
   welcome:
     jobs:
-      - sample:
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /.+/
-      - release?:
-          type: approval
-          requires:
-            - sample
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /.+/
-      -
-        sample2:
-          requires:
-            - sample
-            - release?
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^release_.+$/
+      - sample
