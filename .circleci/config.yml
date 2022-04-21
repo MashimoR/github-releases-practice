@@ -18,6 +18,6 @@ jobs:
 
 workflows:
   welcome:
-    when: << !pipeline.parameters.make_and_upload_data >>
+    when: << pipeline.parameters.make_and_upload_data >> == false
     jobs:
       - sample
