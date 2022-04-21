@@ -18,6 +18,7 @@ jobs:
 
 workflows:
   welcome:
-    when: << pipeline.parameters.make_and_upload_data >> == false
+    when:
+      equal: [false, << pipeline.parameters.make_and_upload_data >>]
     jobs:
       - sample
