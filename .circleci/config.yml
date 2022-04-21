@@ -1,5 +1,3 @@
-version: 2.1
-
 parameters:
   make_and_upload_data:
     type: boolean
