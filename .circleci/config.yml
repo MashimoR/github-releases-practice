@@ -17,6 +17,7 @@ jobs:
             echo 'hello'
 
 workflows:
+  version: 2
   welcome:
     when:
       equal: [false, << pipeline.parameters.make_and_upload_data >>]
