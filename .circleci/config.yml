@@ -6,12 +6,16 @@ jobs:
       - image: debian:10
     steps:
       - checkout
+      - when:
+          condition:
+            matches:
+              value: << pipeline.git.branch >>
+              pattern: /^.+$/
+          steps:
+            - run: echo 'hit!'
+
       - run:
           name: make directory
-          # when:
-          #   matches:
-          #     value: << pipeline.git.branch >>
-          #     pattern: /^.+$/
           command: |
             echo 'hello'
 
