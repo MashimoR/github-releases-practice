@@ -1,7 +1,4 @@
-parameters:
-  make_and_upload_data:
-    type: boolean
-    default: false
+version: 2.1
 
 jobs:
   sample:
@@ -11,13 +8,15 @@ jobs:
       - checkout
       - run:
           name: make directory
-          command: | 
+          when:
+            matches:
+              value: << pipeline.git.branch >>
+              pattern: /^.+$/
+          command: |
             echo 'hello'
 
 workflows:
   version: 2
   welcome:
-    when:
-      equal: [false, << pipeline.parameters.make_and_upload_data >>]
     jobs:
       - sample
