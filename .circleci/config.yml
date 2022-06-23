@@ -8,10 +8,10 @@ jobs:
       - checkout
       - run:
           name: make directory
-          when:
-            matches:
-              value: << pipeline.git.branch >>
-              pattern: /^.+$/
+          # when:
+          #   matches:
+          #     value: << pipeline.git.branch >>
+          #     pattern: /^.+$/
           command: |
             echo 'hello'
 
