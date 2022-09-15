@@ -5,11 +5,11 @@ jobs:
     docker:
       - image: debian:10
     steps:
+      - checkout
+
       - restore_cache:
           name: restore cache
           key: cache-{{ .Branch }}
-
-      - checkout
 
       - run:
           name: setup
