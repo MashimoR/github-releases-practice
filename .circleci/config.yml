@@ -6,8 +6,8 @@ jobs:
       - image: debian:10
     steps:
       - restore_cache:
-        name: restore cache
-        key: cache-{{ .Branch }}
+          name: restore cache
+          key: cache-{{ .Branch }}
 
       - checkout
       - run:
