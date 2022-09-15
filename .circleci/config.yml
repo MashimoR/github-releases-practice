@@ -1,0 +1,33 @@
+version: 2
+
+jobs:
+  sample:
+    docker:
+      - image: debian:10
+    steps:
+      - restore_cache:
+        name: restore cache
+        key: cache-{{ .Branch }}
+
+      - checkout
+      - run:
+          name: setup
+          command: |
+            apt update -y && apt upgrade -y && apt install -y gcc make cmake
+      - run:
+          name: compile
+          command: |
+            cmake -S . -B ./build/
+            cmake --build ./build/
+
+      - save_cache:
+          name: save cache
+          key: cache-{{ .Branch }}
+          paths:
+            - "./build/"
+
+workflows:
+  version: 2
+  welcome:
+    jobs:
+      - sample
