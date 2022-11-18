@@ -6,8 +6,6 @@ commands:
       aaa:
         type: integer
         default: 20
-    environment:
-      AAA: << parameters.aaa >>
     steps:
       - checkout
       - when:
@@ -18,7 +16,7 @@ commands:
 
       - run:
           name: make directory
-          command: echo ${AAA}
+          command: echo << parameters.aaa >>
 
 jobs:
   sample:
