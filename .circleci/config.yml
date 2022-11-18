@@ -1,9 +1,26 @@
 version: 2.1
 
+commands:
+  command_example:
+    environment:
+      AAA: << pipeline.parameters.aaa >>
+    steps:
+      - checkout
+      - when:
+          condition:
+            equal: [ 10, << pipeline.parameters.aaa >> ]
+          steps:
+            - run: echo 'hit!'
+
+      - run:
+          name: make directory
+          command: echo ${AAA}
+
 jobs:
   sample:
     docker:
       - image: debian:10
+    aaa: 10
     steps:
       - checkout
       - when:
@@ -18,6 +35,7 @@ jobs:
           name: make directory
           command: |
             echo 'hello'
+      - command_example
 
 workflows:
   version: 2
