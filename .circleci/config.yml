@@ -1,31 +1,29 @@
 version: 2.1
 
-parameters:
-  aaa:
-    type: integer
-    default: 20
+commands:
+  command_example:
+    parameters:
+      aaa:
+        type: integer
+        default: 20
+    environment:
+      AAA: << parameters.aaa >>
+    steps:
+      - checkout
+      - when:
+          condition:
+            equal: [ 10, << parameters.aaa >> ]
+          steps:
+            - run: echo 'hit!'
 
-# commands:
-#   command_example:
-#     environment:
-#       AAA: << pipeline.parameters.aaa >>
-#     steps:
-#       - checkout
-#       - when:
-#           condition:
-#             equal: [ 10, << pipeline.parameters.aaa >> ]
-#           steps:
-#             - run: echo 'hit!'
-
-#       - run:
-#           name: make directory
-#           command: echo ${AAA}
+      - run:
+          name: make directory
+          command: echo ${AAA}
 
 jobs:
   sample:
     docker:
       - image: debian:10
-    aaa: 10
     steps:
       - checkout
       - when:
@@ -40,7 +38,8 @@ jobs:
           name: make directory
           command: |
             echo 'hello'
-      # - command_example
+      - command_example:
+          aaa: 10
 
 workflows:
   version: 2
