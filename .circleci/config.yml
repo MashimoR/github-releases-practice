@@ -8,7 +8,7 @@ commands:
       - checkout
       - when:
           condition:
-            equal: [ 10, << pipeline.parameters.aaa >> ]
+            equal: [ '10', << pipeline.parameters.aaa >> ]
           steps:
             - run: echo 'hit!'
 
