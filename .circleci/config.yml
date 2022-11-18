@@ -22,6 +22,10 @@ jobs:
   sample:
     docker:
       - image: debian:10
+    parameters:
+      bbb:
+        type: integer
+        default: 20
     steps:
       - checkout
       - when:
@@ -37,10 +41,11 @@ jobs:
           command: |
             echo 'hello'
       - command_example:
-          aaa: 10
+          aaa: << parameters.bbb >>
 
 workflows:
   version: 2
   welcome:
     jobs:
-      - sample
+      - sample:
+          bbb: 10
