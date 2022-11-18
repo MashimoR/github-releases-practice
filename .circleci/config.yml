@@ -5,21 +5,21 @@ parameters:
     type: integer
     default: 20
 
-commands:
-  command_example:
-    environment:
-      AAA: << pipeline.parameters.aaa >>
-    steps:
-      - checkout
-      - when:
-          condition:
-            equal: [ 10, << pipeline.parameters.aaa >> ]
-          steps:
-            - run: echo 'hit!'
+# commands:
+#   command_example:
+#     environment:
+#       AAA: << pipeline.parameters.aaa >>
+#     steps:
+#       - checkout
+#       - when:
+#           condition:
+#             equal: [ 10, << pipeline.parameters.aaa >> ]
+#           steps:
+#             - run: echo 'hit!'
 
-      - run:
-          name: make directory
-          command: echo ${AAA}
+#       - run:
+#           name: make directory
+#           command: echo ${AAA}
 
 jobs:
   sample:
@@ -40,7 +40,7 @@ jobs:
           name: make directory
           command: |
             echo 'hello'
-      - command_example
+      # - command_example
 
 workflows:
   version: 2
