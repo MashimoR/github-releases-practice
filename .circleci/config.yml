@@ -46,7 +46,9 @@ jobs:
       # print env
       - run:
           name: export
-          command: export AAA="aaa"
+          command: |
+            export AAA="aaa"
+            echo ${AAA}
       - run:
           name: print export
           command: echo ${AAA}
