@@ -43,16 +43,6 @@ jobs:
       - command_example:
           aaa: << parameters.bbb >>
 
-      # print env
-      - run:
-          name: export
-          command: |
-            export AAA="aaa"
-            echo ${AAA}
-      - run:
-          name: print export
-          command: echo ${AAA}
-
 workflows:
   version: 2
   welcome:
