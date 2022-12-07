@@ -4,8 +4,8 @@ commands:
   command_example:
     parameters:
       aaa:
-        type: integer
-        default: 20
+        type: string
+        default: echo b
     steps:
       - checkout
       - when:
@@ -24,8 +24,8 @@ jobs:
       - image: debian:10
     parameters:
       bbb:
-        type: integer
-        default: 20
+        type: string
+        default: echo a
     steps:
       - checkout
       - when:
@@ -48,4 +48,4 @@ workflows:
   welcome:
     jobs:
       - sample:
-          bbb: 10
+          bbb: $(git rev-parse --abbrev-ref HEAD)
