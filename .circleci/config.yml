@@ -48,7 +48,5 @@ workflows:
   welcome:
     jobs:
       - sample:
-          name: << matrix.bbb >>
-          matrix:
-            parameters:
-              bbb: [ $(git rev-parse --abbrev-ref HEAD), hello ]
+          name: << bbb >>
+          bbb: $(git rev-parse --abbrev-ref HEAD)
