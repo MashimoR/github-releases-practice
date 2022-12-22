@@ -48,5 +48,5 @@ workflows:
   welcome:
     jobs:
       - sample:
-          name: << bbb >>
+          name: << parameters.bbb >>
           bbb: $(git rev-parse --abbrev-ref HEAD)
