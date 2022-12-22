@@ -1,0 +1,52 @@
+version: 2.1
+
+commands:
+  command_example:
+    parameters:
+      aaa:
+        type: string
+        default: echo b
+    steps:
+      - checkout
+      - when:
+          condition:
+            equal: [ 10, << parameters.aaa >> ]
+          steps:
+            - run: echo 'hit!'
+
+      - run:
+          name: make directory
+          command: echo << parameters.aaa >>
+
+jobs:
+  sample:
+    docker:
+      - image: debian:10
+    parameters:
+      bbb:
+        type: string
+        default: echo a
+    steps:
+      - checkout
+      - when:
+          condition:
+            matches:
+              value: << pipeline.git.branch >>
+              pattern: /^.+$/
+          steps:
+            - run: echo 'hit!'
+
+      - run:
+          name: make directory
+          command: |
+            echo 'hello'
+      - command_example:
+          aaa: << parameters.bbb >>
+
+workflows:
+  version: 2
+  welcome:
+    jobs:
+      - sample:
+          name: << parameters.bbb >>
+          bbb: $(git rev-parse --abbrev-ref HEAD)
