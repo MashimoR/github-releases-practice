@@ -50,4 +50,5 @@ workflows:
       - sample:
           name: << matrix.bbb >>
           matrix:
-            bbb: [ $(git rev-parse --abbrev-ref HEAD), hello ]
+            parameters:
+              bbb: [ $(git rev-parse --abbrev-ref HEAD), hello ]
